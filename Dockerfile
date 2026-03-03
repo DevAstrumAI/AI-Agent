@@ -24,14 +24,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ── Pre-download embedding model during build ─────────────────
-# This bakes the model into the image so startup is instant
-RUN python -c "\
-from sentence_transformers import SentenceTransformer; \
-print('Downloading embedding model...'); \
-SentenceTransformer('paraphrase-multilingual-mpnet-base-v2'); \
-print('Model downloaded and cached')"
-
 RUN playwright install chromium --with-deps
 
 # ── Copy application code ─────────────────────────────────────

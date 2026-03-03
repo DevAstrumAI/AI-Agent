@@ -4,22 +4,17 @@ python-dotenv
 langchain
 langchain-community
 langchain-core
-langchain-huggingface
 langchain-groq
-# sentence-transformers
 faiss-cpu
 rank_bm25
 pypdf
-# Web scraping
 playwright
 beautifulsoup4
 lxml
 tqdm
-scikit-learn
-# LiveKit
+httpx
 livekit
 livekit-agents>=0.8.0
 livekit-plugins-silero>=0.6.0
-# HTTP client
-httpx
-langchain-openai openai
+langchain-openai
+openai
