@@ -94,7 +94,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://functiomed-voice-agent.vercel.app",  # your Vercel URL
+        "https://functiomed-voice-agent.vercel.app",           # production
+        "https://functiomed-voice-agent-36f09vvsu-haneef-5820s-projects.vercel.app",  # this preview
     ],
     allow_credentials=True,
     allow_methods=["*"],
