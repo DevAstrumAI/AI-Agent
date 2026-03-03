@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 // ─── Config ───────────────────────────────────────────────────
-const BACKEND_URL = "http://localhost:8000";
+const BACKEND_URL = "https://ai-agent-itlm.onrender.com";
 
 // ─── Helpers ──────────────────────────────────────────────────
 const SERVICE_COLORS = {
