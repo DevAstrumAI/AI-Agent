@@ -6,7 +6,7 @@ langchain-community
 langchain-core
 langchain-huggingface
 langchain-groq
-sentence-transformers
+# sentence-transformers
 faiss-cpu
 rank_bm25
 pypdf
@@ -22,3 +22,4 @@ livekit-agents>=0.8.0
 livekit-plugins-silero>=0.6.0
 # HTTP client
 httpx
+langchain-openai openai
