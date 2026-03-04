@@ -93,9 +93,10 @@ app = FastAPI(title="Functiomed Voice AI", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://functiomed-voice-agent.vercel.app",        # ← main production domain
-        "http://localhost:5173",                             # local dev
-        "http://localhost:3000",                             # local dev
+        "https://functiomed-voice-agent.vercel.app",
+        "https://functiomed-voice-agent-e2of1vsqb-haneef-5820s-projects.vercel.app",  # ← add this
+        "http://localhost:5173",
+        "http://localhost:3000",
     ],
     allow_credentials=False,
     allow_methods=["*"],
