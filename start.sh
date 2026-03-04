@@ -2,7 +2,7 @@
 set -e
 
 echo "🚀 Starting Voice Agent Worker..."
-python voice_agent/worker.py &
+python worker.py &
 VOICE_AGENT_PID=$!
 
 echo "🌐 Starting FastAPI Backend..."
