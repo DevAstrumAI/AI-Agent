@@ -2,7 +2,7 @@
 set -e
 
 echo "🚀 Starting Voice Agent Worker..."
-python worker.py &
+python worker.py start &
 VOICE_AGENT_PID=$!
 
 echo "🌐 Starting FastAPI Backend..."
@@ -13,6 +13,5 @@ echo "✅ Both services started. Monitoring..."
 echo "   Voice Agent PID: $VOICE_AGENT_PID"
 echo "   FastAPI PID:     $FASTAPI_PID"
 
-# Compatible with all bash versions
 wait $VOICE_AGENT_PID
 wait $FASTAPI_PID
