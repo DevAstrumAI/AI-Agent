@@ -1,9 +1,10 @@
 services:
+  # ── Backend API ─────────────────────────────────────────────
   - type: web
     name: functiomed-backend
     runtime: docker
     dockerfilePath: ./Dockerfile.backend
-    plan: starter
+    plan: free
     envVars:
       - key: OPENAI_API_KEY
         sync: false
@@ -16,17 +17,18 @@ services:
       - key: LIVEKIT_API_SECRET
         sync: false
 
-  - type: worker
+  # ── LiveKit Voice Agent ──────────────────────────────────────
+  - type: web
     name: functiomed-voice-agent
     runtime: docker
     dockerfilePath: ./Dockerfile.voiceagent
-    plan: starter
+    plan: free
     envVars:
-      - key: OPENAI_API_KEY
-        sync: false
       - key: LIVEKIT_URL
         sync: false
       - key: LIVEKIT_API_KEY
         sync: false
       - key: LIVEKIT_API_SECRET
+        sync: false
+      - key: OPENAI_API_KEY
         sync: false
