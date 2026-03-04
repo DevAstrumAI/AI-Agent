@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl-dev \
     curl \
     sqlite3 \
+    bash \
     && rm -rf /var/lib/apt/lists/*
 
 # ── Install Python dependencies ───────────────────────────────
@@ -37,5 +38,5 @@ RUN chmod +x /app/start.sh
 # ── Expose port ───────────────────────────────────────────────
 EXPOSE 8080
 
-# ── Start both services via shell script ──────────────────────
-CMD ["/app/start.sh"]
+# ── Start both services via bash explicitly ───────────────────
+CMD ["/bin/bash", "/app/start.sh"]
