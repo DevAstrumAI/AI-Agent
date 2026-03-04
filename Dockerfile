@@ -18,8 +18,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # ── Install Python dependencies ───────────────────────────────
-# Copy requirements first so Docker caches this layer
-# (only rebuilds if requirements.txt changes)
 COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
@@ -32,11 +30,12 @@ COPY . .
 # Create required directories if they don't exist
 RUN mkdir -p data/clean_text data/raw_html data/faiss_index database pdf_data/files
 
-# ── Expose FastAPI port ───────────────────────────────────────
-# EXPOSE 8000
+# ── Copy and set entrypoint script ───────────────────────────
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
 
-# # Default command (overridden by docker-compose for each service)
-# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-# For Production
+# ── Expose port ───────────────────────────────────────────────
 EXPOSE 8080
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+# ── Start both services via shell script ──────────────────────
+CMD ["/app/start.sh"]

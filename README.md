@@ -4,6 +4,7 @@ A fully self-hosted voice AI assistant for the **functiomed** medical clinic. Pa
 
 ---
 
+
 ## Tech Stack
 
 | Layer | Technology | Cost |
