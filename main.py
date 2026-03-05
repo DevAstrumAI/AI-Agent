@@ -450,19 +450,38 @@ def chat(request: ChatQueryRequest):
 
 #--------------------------------New Endpoint for tokens-------------------------------------------------
 @app.get("/livekit/token")
-def get_livekit_token(room: str = "room-1", username: str = "patient"):
+async def get_livekit_token(room: str = "room-1", username: str = "patient"):
     api_key     = os.getenv("LIVEKIT_API_KEY", "devkey")
     api_secret  = os.getenv("LIVEKIT_API_SECRET", "secret")
     livekit_url = os.getenv("LIVEKIT_URL_BROWSER") or os.getenv("LIVEKIT_URL", "ws://localhost:7880")
+    livekit_ws  = os.getenv("LIVEKIT_URL", "wss://functiomedvoiceagent-lxsy5b5o.livekit.cloud")
 
+    # Generate token
     token = (
         livekit_api.AccessToken(api_key, api_secret)
         .with_grants(livekit_api.VideoGrants(room_join=True, room=room))
         .with_identity(username)
         .with_name(f"Patient - {username}")
-        .with_attributes({"lk.agent.dispatch": "functiomed-agent"})  # ← ADD THIS
         .to_jwt()
     )
+
+    # Explicitly dispatch the agent to this room
+    try:
+        lkapi = livekit_api.LiveKitAPI(
+            url=livekit_ws,
+            api_key=api_key,
+            api_secret=api_secret,
+        )
+        await lkapi.agent.create_dispatch(
+            livekit_api.CreateAgentDispatchRequest(
+                agent_name="functiomed-agent",
+                room=room,
+            )
+        )
+        await lkapi.aclose()
+        print(f"✅ Agent dispatched to room: {room}")
+    except Exception as e:
+        print(f"⚠️ Agent dispatch failed: {e}")
 
     return {"token": token, "url": livekit_url, "room": room}
 
