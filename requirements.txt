@@ -13,8 +13,8 @@ beautifulsoup4
 lxml
 tqdm
 httpx
-livekit
-livekit-agents>=0.8.0
-livekit-plugins-silero>=0.6.0
+livekit>=1.0.0
+livekit-api>=1.0.0
+livekit-agents>=1.2.0
 langchain-openai
 openai
