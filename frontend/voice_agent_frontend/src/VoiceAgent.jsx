@@ -4,7 +4,7 @@ import { Room, RoomEvent } from 'livekit-client'
 // ─────────────────────────────────────────────────────────────
 // Constants
 // ─────────────────────────────────────────────────────────────
-const BACKEND_URL = 'https://ai-agent-backend-daoj.onrender.com'
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://ai-agent-backend-daoj.onrender.com'
 const STATE_TO_STEP = {
   collect_service:  0,
   collect_date:     1,
