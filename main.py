@@ -451,11 +451,8 @@ def chat(request: ChatQueryRequest):
 #--------------------------------New Endpoint for tokens-------------------------------------------------
 @app.get("/livekit/token")
 def get_livekit_token(room: str = "room-1", username: str = "patient"):
-    api_key    = os.getenv("LIVEKIT_API_KEY", "devkey")
-    api_secret = os.getenv("LIVEKIT_API_SECRET", "secret")
-
-    # Browser URL — uses localhost (not the internal docker hostname)
-    # Falls back to internal URL if BROWSER var not set (local dev without Docker)
+    api_key     = os.getenv("LIVEKIT_API_KEY", "devkey")
+    api_secret  = os.getenv("LIVEKIT_API_SECRET", "secret")
     livekit_url = os.getenv("LIVEKIT_URL_BROWSER") or os.getenv("LIVEKIT_URL", "ws://localhost:7880")
 
     token = (
@@ -463,6 +460,7 @@ def get_livekit_token(room: str = "room-1", username: str = "patient"):
         .with_grants(livekit_api.VideoGrants(room_join=True, room=room))
         .with_identity(username)
         .with_name(f"Patient - {username}")
+        .with_attributes({"lk.agent.dispatch": "functiomed-agent"})  # ← ADD THIS
         .to_jwt()
     )
 
