@@ -472,7 +472,7 @@ async def get_livekit_token(room: str = "room-1", username: str = "patient"):
             api_key=api_key,
             api_secret=api_secret,
         )
-        await lkapi.agent.create_dispatch(
+        await lkapi.agent_dispatch.create_dispatch(
             livekit_api.CreateAgentDispatchRequest(
                 agent_name="functiomed-agent",
                 room=room,
